@@ -17,6 +17,17 @@ public class HangmanGameTest {
     }
 
     @Test
+    public void should_new_game_with_word_horse() throws Exception {
+        // given
+        hangmanGame.game("HORSE");
+        // when
+        // then
+        assertThat(hangmanGame.chance(), is(12));
+        assertThat(hangmanGame.used(), is("AEIOU"));
+        assertThat(hangmanGame.display(), is("_O__E"));
+    }
+
+    @Test
     public void should_new_game() throws Exception {
         // given
         hangmanGame.game("HANGMAN");
