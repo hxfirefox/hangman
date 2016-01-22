@@ -5,7 +5,7 @@ public class HangmanGame {
     private char[] answers;
     private int chance = 12;
     private String used = "AEIOU";
-    private String display = "";
+    private char[] displays;
 
     public void game(String answer) {
         answers = answer.toCharArray();
@@ -20,11 +20,10 @@ public class HangmanGame {
     }
 
     private void initDashes(int length) {
-        char[] dashes = new char[length];
+        displays = new char[length];
         for (int i = 0; i < length; i++) {
-            dashes[i] = '_';
+            displays[i] = '_';
         }
-        display = String.valueOf(dashes);
     }
 
     public boolean tryWith(char letter) {
@@ -34,7 +33,6 @@ public class HangmanGame {
     }
 
     private boolean tryWithLetter(char letter) {
-        final char[] displays = display.toCharArray();
         boolean matched = false;
         for (int i = 0; i < answers.length; i++) {
             if (answers[i] == letter) {
@@ -42,9 +40,6 @@ public class HangmanGame {
                 matched = true;
             }
         }
-
-        display = String.valueOf(displays);
-
         return matched;
     }
 
@@ -56,7 +51,7 @@ public class HangmanGame {
     }
 
     public String display() {
-        return display;
+        return String.valueOf(displays);
     }
 
     public int chance() {
