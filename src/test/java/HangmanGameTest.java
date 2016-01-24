@@ -36,7 +36,7 @@ public class HangmanGameTest {
         // then
         assertThat(matched, is(true));
         assertThat(hangmanGame.chance(), is(12));
-        assertThat(hangmanGame.used(), is("AEIOU"));
+        assertThat(hangmanGame.used(), is("AEIOUH"));
         assertThat(hangmanGame.display(), is("HA___A_"));
     }
 

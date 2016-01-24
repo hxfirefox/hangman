@@ -37,8 +37,9 @@ public class HangmanGame {
 
     public boolean tryWith(char letter) {
         final boolean matched = tryWithLetter(letter);
+        used += letter;
         if (!matched) {
-            adjustUsedAndChance(letter);
+            adjustChance();
         }
         checkGame();
         return matched;
@@ -65,9 +66,8 @@ public class HangmanGame {
         return matched;
     }
 
-    private void adjustUsedAndChance(char letter) {
+    private void adjustChance() {
         chance--;
-        used += letter;
     }
 
     public String display() {
