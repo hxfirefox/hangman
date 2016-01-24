@@ -17,17 +17,6 @@ public class HangmanGameTest {
     }
 
     @Test
-    public void should_new_game_with_word_horse() throws Exception {
-        // given
-        hangmanGame.game("HORSE");
-        // when
-        // then
-        assertThat(hangmanGame.chance(), is(12));
-        assertThat(hangmanGame.used(), is("AEIOU"));
-        assertThat(hangmanGame.display(), is("_O__E"));
-    }
-
-    @Test
     public void should_new_game() throws Exception {
         // given
         hangmanGame.game("HANGMAN");
@@ -62,5 +51,44 @@ public class HangmanGameTest {
         assertThat(hangmanGame.chance(), is(11));
         assertThat(hangmanGame.used(), is("AEIOUS"));
         assertThat(hangmanGame.display(), is("_A___A_"));
+    }
+
+    @Test
+    public void should_game_win_when_all_match_before_chance_expired() throws Exception {
+        // given
+        hangmanGame.game("HANGMAN");
+        // when
+        hangmanGame.tryWith('H');
+        hangmanGame.tryWith('N');
+        hangmanGame.tryWith('G');
+        hangmanGame.tryWith('M');
+        // then
+        assertThat(hangmanGame.chance() > 0, is(true));
+        assertThat(hangmanGame.display(), is("HANGMAN"));
+        assertThat(hangmanGame.result(), is("Game Win"));
+    }
+
+    @Test
+    public void should_game_over_after_chance_expired() throws Exception {
+        // given
+        hangmanGame.game("HANGMAN");
+        // when
+        for (int i = 0; i < 12; i++) {
+            hangmanGame.tryWith('S');
+        }
+        // then
+        assertThat(hangmanGame.chance() == 0, is(true));
+        assertThat(hangmanGame.used(), is("AEIOUSSSSSSSSSSSS"));
+        assertThat(hangmanGame.result(), is("Game Over"));
+    }
+
+    @Test
+    public void should_give_answer() throws Exception {
+        // given
+        hangmanGame.game("HANGMAN");
+        // when
+
+        // then
+        assertThat(hangmanGame.answer(), is("HANGMAN"));
     }
 }

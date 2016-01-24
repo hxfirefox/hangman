@@ -2,9 +2,12 @@
  * Created by hx on 16-1-22.
  */
 public class HangmanGame {
+    public static final int TOTAL_CHANCE = 12;
+    public static final String INIT_USED = "AEIOU";
+    private int chance;
+    private String used;
+    private String result;
     private char[] answers;
-    private int chance = 12;
-    private String used = "AEIOU";
     private char[] displays;
 
     public void game(String answer) {
@@ -13,10 +16,16 @@ public class HangmanGame {
     }
 
     private void prepare() {
+        reset();
         initDashes(answers.length);
-        for(char c:used.toCharArray()) {
+        for (char c : used.toCharArray()) {
             tryWithLetter(c);
         }
+    }
+
+    private void reset() {
+        chance = TOTAL_CHANCE;
+        used = INIT_USED;
     }
 
     private void initDashes(int length) {
@@ -28,8 +37,21 @@ public class HangmanGame {
 
     public boolean tryWith(char letter) {
         final boolean matched = tryWithLetter(letter);
-        changeUsedAndChance(letter, matched);
+        if (!matched) {
+            adjustUsedAndChance(letter);
+        }
+        checkGame();
         return matched;
+    }
+
+    private void checkGame() {
+        if (chance == 0) {
+            result = "Game Over";
+        } else {
+            if (String.valueOf(answers).equals(String.valueOf(displays))) {
+                result = "Game Win";
+            }
+        }
     }
 
     private boolean tryWithLetter(char letter) {
@@ -43,11 +65,9 @@ public class HangmanGame {
         return matched;
     }
 
-    private void changeUsedAndChance(char letter, boolean matched) {
-        if (!matched) {
-            chance = chance - 1;
-            used += letter;
-        }
+    private void adjustUsedAndChance(char letter) {
+        chance--;
+        used += letter;
     }
 
     public String display() {
@@ -60,5 +80,13 @@ public class HangmanGame {
 
     public String used() {
         return used;
+    }
+
+    public String result() {
+        return result;
+    }
+
+    public String answer() {
+        return String.valueOf(answers);
     }
 }
