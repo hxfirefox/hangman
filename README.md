@@ -4,7 +4,7 @@ hangman game
 
 Hangman是一个非常有趣的猜字游戏，游戏双方可以是玩家或电脑，游戏中玩家或电脑准备一个单词，另一玩家尝试猜出该单词，当玩家猜错时，作为惩罚性措施，对方将画上一笔hangman的其中一个元素，当整个hangman完成时，游戏终止，玩家告负。
 
-![hangman](https://en.wikipedia.org/wiki/Hangman_%28game%29#/media/File:Hangman.svg)
+![hangman](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Hangman.svg/108px-Hangman.svg.png)
 下面请简单实现该游戏，游戏需求如下：
 
 # 需求
